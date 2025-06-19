@@ -1,4 +1,7 @@
 experiments/
+translation_filter_logs/
+output_log/
+outputs/
 datasets/
 indexes/
 datasets/
@@ -11,3 +14,4 @@ tests/run/
 outputs/
 results/
 wandb/
+scripts/
