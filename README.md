@@ -1,4 +1,4 @@
-## This Repository obuilt upon BERGEN: A Benchmarking Library for Retrieval-Augmented Generation
+## This Repository is built upon BERGEN: A Benchmarking Library for Retrieval-Augmented Generation
  
 [![arXiv](https://img.shields.io/badge/arXiv-2407.01102-b31b1b.svg)](https://arxiv.org/abs/2407.01102)
 
