@@ -7,6 +7,7 @@
 
 ## Key Features
 
+- Baseline
 - CROSSRAG
 - DKM-RAG
 - HARD-FILTER
@@ -20,7 +21,7 @@ For more information and experimental findings, please see baseline papers:
 ## Quick Start
 
 You can configure each component using simple YAML files. Here's an example of running an experiment:
-
+- This is example script for HARD-FILTER, QTT-RAG.
 ```bash
 RUN_NAME="Your RUN_NAME"
 EXP_FOLDER="Your EXP_FOLDER"
@@ -29,7 +30,7 @@ LOG_FOLDER="Your LOG_FOLDER"
 python bergen_our_rag_tag.py \
   run_name="$RUN_NAME" \
   generator='exaone-3.5-7.8b' \
-  translation_model='llama-31-8b-instruct' \
+  translation_model='llama-31-8b-instruct' \ ### DKM-RAG needs refine_model instead of translation_model, No need to specify neither of them for CROSSRAG and Baseline  ###
   retriever='bge-m3' \
   reranker='bge-m3' \
   dataset='xor_tydiqa/xor_tydiqa_ar.retrieve_en_ar.yaml' \
