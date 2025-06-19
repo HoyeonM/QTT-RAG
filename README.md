@@ -1,5 +1,7 @@
 ## This Repository is built upon BERGEN: A Benchmarking Library for Retrieval-Augmented Generation
- 
+
+Original Repo: https://github.com/naver/bergen 
+
 [![arXiv](https://img.shields.io/badge/arXiv-2407.01102-b31b1b.svg)](https://arxiv.org/abs/2407.01102)
 
 [![License: CC BY-NC-SA 4.0](https://img.shields.io/badge/License-CC%20BY--NC--SA%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by-nc-sa/4.0/)
