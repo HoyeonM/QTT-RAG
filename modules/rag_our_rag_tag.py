@@ -36,18 +36,15 @@ from langdetect import detect
 
 
 def extract_json_from_llm_output(response_text):
-    """
-    응답 텍스트에서 유효한 JSON 객체 하나를 찾아 파싱.
-    여러 개가 있어도 첫 번째만 사용.
-    """
     matches = re.findall(r'\{.*?\}', response_text, re.DOTALL)
     for match in matches:
         try:
             return json.loads(match)
         except json.JSONDecodeError:
             continue
-    raise ValueError(f"❌ 유효한 JSON을 추출하지 못했습니다. LLM 출력:\n{response_text}")
+    raise ValueError(f"❌ No valid json:\n{response_text}")
     
+### Change language as needed ###
 
 # def is_non_korean(text):
 #     if not isinstance(text, str) or text.strip() == "":
@@ -352,13 +349,11 @@ class RAG:
 
     def translate_docs(self, dataset):
         original_docs = dataset['doc']
-        # print(f"🍕 Original docs: {original_docs[:3]}")
-
         translated_docs = []
         for doc in tqdm(original_docs, desc="Translating documents to arb using nllb..."):
             translated_doc = []
             for doc_text in doc:
-                if is_non_arabic(doc_text):
+                if is_non_arabic(doc_text):  ### Change language as needed ###
                     print(f"Translating to arb: {doc_text}")
                     translate_doc_text = self.translator(doc_text, src_lang="eng_Latn", tgt_lang="arb_Arab", max_length=600)[0]["translation_text"]
                     translated_doc.append(translate_doc_text)
@@ -376,7 +371,7 @@ class RAG:
             print("log_folder is None, using default log folder.")
             log_folder = self.log_folder
 
-        # 먼저 번역 수행
+        # translation first
         translated_dataset = self.translate_docs(dataset)
 
         original_docs_list = dataset['doc']
@@ -409,7 +404,7 @@ class RAG:
                         grammar_score = scores.get("grammar")
                         fluency_score = scores.get("fluency")
                     except Exception as e:
-                        print(f"❌ LLM 평가 실패 (query_idx={query_idx}, doc_idx={i}): {e}")
+                        print(f"❌ Fail evaluation (query_idx={query_idx}, doc_idx={i}): {e}")
                         
                     # final_text = (
                     #     f"{trans_doc_text}\n"
@@ -428,12 +423,12 @@ class RAG:
                     #     f"[pontuação] Consistência semântica: {semantic_score}, Precisão gramatical: {grammar_score}, Naturalidade e fluidez: {fluency_score}"
                     # )
                 else:
-                    print(f"✅ 원문이므로 평가 생략 (query_idx={query_idx}, doc_idx={i})")
+                    print(f"✅ Already in query language (query_idx={query_idx}, doc_idx={i})")
                     final_text = trans_doc_text  
                         
                 current_processed_doc_group.append(final_text)
 
-                # 로그 누적 (점수 포함)
+                # Logging
                 records.append({
                     "query_idx": query_idx,
                     "doc_idx": i,
@@ -447,7 +442,7 @@ class RAG:
                 })
             final_docs_list.append(current_processed_doc_group)
 
-        # 샘플 출력
+        # Print sample
         print("\nSample of translated and filtered documents (first few queries):")
         for i in range(min(3, len(original_docs_list))):
             print(f"Query: {questions[i]}")
@@ -455,11 +450,9 @@ class RAG:
             print(f"Final Docs: {final_docs_list[i][:2]}")
             print("-" * 50)
 
-        # dataset에 반영
         dataset = dataset.remove_columns('doc')
         dataset = dataset.add_column('doc', final_docs_list)
 
-        # 로그 저장
         df = pd.DataFrame(records)
         log_path = os.path.join(log_folder, f"translation_filter_log.csv")
         df.to_csv(log_path, index=False, encoding="utf-8")
