@@ -27,6 +27,8 @@ import json
 from functools import partial
 import random
 from typing import Dict
+from datasets import load_dataset, Dataset, load_from_disk
+
 
 # Base class that every processor interhits from 
 class Processor(object):
@@ -279,8 +281,8 @@ class KILT100w(Processor):
 
     def process(self):
         hf_name = 'kilt_wikipedia'
-        dataset = datasets.load_dataset(hf_name, num_proc=self.num_proc)[self.split]
-
+        # dataset = datasets.load_dataset(hf_name, num_proc=self.num_proc)[self.split]
+        dataset = datasets.load_from_disk(os.path.join(self.out_folder, f'{self.dataset_name}_{self.split}'))
         def map_100w(sample, num_words=100):
             wiki_id = sample['wikipedia_id']
             title = sample['wikipedia_title']

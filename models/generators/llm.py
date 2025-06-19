@@ -71,7 +71,8 @@ class LLM(Generator):
         try:
             self.tokenizer = AutoTokenizer.from_pretrained(tokenizer_name, 
                                                            gguf_file=gguf_file, 
-                                                           clean_up_tokenization_spaces=True)
+                                                           clean_up_tokenization_spaces=True,
+                                                           trust_remote_code=True)
         except:
             config_dict = os.path.join(tokenizer_name, 'config.json')
             with open(config_dict, 'r') as f:
@@ -79,7 +80,8 @@ class LLM(Generator):
             tokenizer_name = config['_name_or_path']
             self.tokenizer = AutoTokenizer.from_pretrained(tokenizer_name, 
                                                            gguf_file=gguf_file, 
-                                                           clean_up_tokenization_spaces=True)
+                                                           clean_up_tokenization_spaces=True,
+                                                           trust_remote_code=True)
 
         self.tokenizer.padding_side = "left"
         # Ensure the pad_token is set in a prioritized manner: bos_token > pad_token > eos_token
@@ -100,6 +102,7 @@ class LLM(Generator):
                 torch_dtype=torch.bfloat16,
                 device_map='auto',
                 local_files_only=local_path,
+                trust_remote_code=True,
             )
 
         elif quantization == "int4":
@@ -116,12 +119,14 @@ class LLM(Generator):
                 torch_dtype=torch.bfloat16,
                 device_map='auto',
                 local_files_only=local_path,
+                trust_remote_code=True,
             )
         else:
             self.model = model_class.from_pretrained(
                 self.model_name,
                 device_map='auto',
                 gguf_file=gguf_file,
+                trust_remote_code=True,
             )
 
         self.model = self.model.bfloat16()
