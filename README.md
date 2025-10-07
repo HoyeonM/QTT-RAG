@@ -13,7 +13,7 @@ Original Repo: https://github.com/naver/bergen
 - CROSSRAG
 - DKM-RAG
 - HARD-FILTER
-- QTT-RAG
+- **QTT-RAG** (Our proposed method)
 
 
 For more information and experimental findings, please see baseline papers:
