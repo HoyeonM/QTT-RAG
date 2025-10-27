@@ -15,6 +15,8 @@ Original Repo: https://github.com/naver/bergen
 - HARD-FILTER
 - **QTT-RAG** (Our proposed method)
 
+<img width="3000" height="1250" alt="QTT_pipeline" src="https://github.com/user-attachments/assets/903611bb-1201-4158-ba31-acb19b0e5cc4" />
+**QTT-RAG Overall Pipeline**
 
 For more information and experimental findings, please see baseline papers:
 - CROSSRAG paper: https://arxiv.org/abs/2504.03616 
