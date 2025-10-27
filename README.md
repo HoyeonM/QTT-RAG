@@ -2,11 +2,6 @@
 
 Original Repo: https://github.com/naver/bergen 
 
-[![arXiv](https://img.shields.io/badge/arXiv-2407.01102-b31b1b.svg)](https://arxiv.org/abs/2407.01102)
-
-[![License: CC BY-NC-SA 4.0](https://img.shields.io/badge/License-CC%20BY--NC--SA%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by-nc-sa/4.0/)
-
-
 ## Key Features
 
 - Baseline
@@ -15,8 +10,13 @@ Original Repo: https://github.com/naver/bergen
 - HARD-FILTER
 - **QTT-RAG** (Our proposed method)
 
-<img width="3000" height="1250" alt="QTT_pipeline" src="https://github.com/user-attachments/assets/903611bb-1201-4158-ba31-acb19b0e5cc4" />
-**QTT-RAG Overall Pipeline**
+<p align="center">
+  <img src="./QTT_pipeline.png" width="75%">
+  <br>
+  <em>Figure 1. Quality-Aware Translation Tagging (QTT) Pipeline Overview.</em>
+</p>
+
+
 
 For more information and experimental findings, please see baseline papers:
 - CROSSRAG paper: https://arxiv.org/abs/2504.03616 
