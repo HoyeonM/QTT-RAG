@@ -1,7 +1,7 @@
 ## This Repository is built upon BERGEN: A Benchmarking Library for Retrieval-Augmented Generation
 
 Original Repo: https://github.com/naver/bergen 
-
+QTT-RAG Paper: https://arxiv.org/abs/2510.23070
 ## Key Features
 
 - Baseline
